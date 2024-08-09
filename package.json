@@ -1,6 +1,6 @@
 {
   "name": "cryptopath",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "lib for keys derivation, mainly derive an ECDSA SECP256K1 pubkey via chaincode and derivation path",
   "main": "lib/index.js",
   "scripts": {
