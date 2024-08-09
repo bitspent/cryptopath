@@ -1,8 +1,9 @@
 # CryptoPath
-Lightweight lib for deriving public keys, and verifying dervied signed messages, using elliptic curve cryptography (specifically secp256k1).
-Following Publick keys Derivation along specified paths and chaincodes.
+
+Lightweight library for deriving public keys and verifying derived signed messages using elliptic curve cryptography, specifically secp256k1. The library supports public key derivation along specified paths and chain codes.
 
 ## Installation
+
 Install the package via npm:
 
 ```bash
@@ -11,7 +12,7 @@ npm install cryptopath
 
 ## Usage
 
-### getDerivedPubkey
+### `getDerivedPubKey`
 
 ```javascript
 const { getDerivedPubKey } = require('cryptopath');
@@ -32,7 +33,7 @@ const derivedPubKey = getDerivedPubKey(hexPubKey, hexChainCode, path);
 console.log(derivedPubKey);
 ```
 
-### verifyDerivedSignature
+### `verifyDerivedSignature`
 
 ```javascript
 const { verifyDerivedSignature } = require('cryptopath');
@@ -55,18 +56,15 @@ const hexMessage = Buffer.from(message, 'ascii').toString('hex');
 const result = verifyDerivedSignature(hexMessage, sig.r, sig.s, sig.v, hexPubKey, hexChainCode, path);
 
 console.log(result);
-
 ```
 
-### How It Works
+## How It Works
 
-CryptoPath derives public keys from a given extended public key and chain code using a specified derivation path. 
-This process is crucial in cryptographic applications where secure, deterministic key generation is required.
-The library leverages the secp256k1 elliptic curve, which is widely used in blockchain technology.
+CryptoPath derives public keys from a given extended public key and chain code using a specified derivation path. This process is crucial in cryptographic applications where secure, deterministic key generation is required. The library leverages the secp256k1 elliptic curve, which is widely used in blockchain technology.
 
-### API Reference
+## API Reference
 
-#### `getDerivedPubKey(hexPubKey, hexChainCode, path)`
+### `getDerivedPubKey(hexPubKey, hexChainCode, path)`
 
 Derives a public key from an extended public key, chain code, and derivation path.
 
@@ -78,10 +76,28 @@ Derives a public key from an extended public key, chain code, and derivation pat
 - **Returns:**
   - A string representing the derived public key in hexadecimal format.
 
+### `verifyDerivedSignature(hexMessage, r, s, v, hexPubKey, hexChainCode, path)`
+
+Verifies a signature derived from a message using the provided public key, chain code, and derivation path.
+
+- **Parameters:**
+  - `hexMessage` (string): The message in hexadecimal format.
+  - `r` (string): The `r` value of the ECDSA signature.
+  - `s` (string): The `s` value of the ECDSA signature.
+  - `v` (number): The recovery parameter.
+  - `hexPubKey` (string): The public key in hexadecimal format.
+  - `hexChainCode` (string): The chain code in hexadecimal format.
+  - `path` (string): The derivation path in BIP32 format.
+
+- **Returns:**
+  - An object containing:
+    - `valid` (boolean): Whether the signature is valid.
+    - `recoveredPubKey` (string): The recovered public key in hexadecimal format.
+    - `derivedPubKey` (string): The derived public key in hexadecimal format.
+
 ## Contributing
 
-Contributions are welcome!
-If you have suggestions for improvements and additional utilities or have found bugs, please feel free to open an issue or submit a pull request on GitHub.
+Contributions are welcome! If you have suggestions for improvements, additional utilities, or have found bugs, please feel free to open an issue or submit a pull request on GitHub.
 
 ## License
 
