@@ -1,6 +1,6 @@
 # CryptoPath
-Lightweight lib for deriving public keys using elliptic curve cryptography (specifically secp256k1).
-Initially for Publick keys Derivation along specified paths and chaincodes.
+Lightweight lib for deriving public keys, and verifying dervied signed messages, using elliptic curve cryptography (specifically secp256k1).
+Following Publick keys Derivation along specified paths and chaincodes.
 
 ## Installation
 Install the package via npm:
@@ -11,7 +11,7 @@ npm install cryptopath
 
 ## Usage
 
-### Node.js Example
+### getDerivedPubkey
 
 ```javascript
 const { getDerivedPubKey } = require('cryptopath');
@@ -30,6 +30,32 @@ const derivedPubKey = getDerivedPubKey(hexPubKey, hexChainCode, path);
 
 // Expected Output: 02e3bd0c4d3d97511e0003794fef879ba8550c796e4289b0c1682443b21ab162fd
 console.log(derivedPubKey);
+```
+
+### verifyDerivedSignature
+
+```javascript
+const { verifyDerivedSignature } = require('cryptopath');
+
+const message = "hi";
+
+const sig = {
+    r: "16278155f86fe2e2fe733eebd22288047d6ae86abed2885798f563dbad3a7a01",
+    s: "64b18c69e901125668b0b450094ac9ebc2a33eb3d9cbab4f135fea4bed54a35a",
+    v: 0 // recovery_param
+};
+
+const hexPubKey = "03f7233f937751a5e93c862476ac2fa72ba224af2357f2f9b0476ad8def0ff8be6";
+const hexChainCode = "03aa287e23cbf70094f485a01b31614dfb3cbb02e095092f8967324e405cc8c7";
+const path = "m/44'/60'/0'/0/0";
+
+const hexMessage = Buffer.from(message, 'ascii').toString('hex');
+
+// { valid: true, recoveredPubKey, derivedPubkey }
+const result = verifyDerivedSignature(hexMessage, sig.r, sig.s, sig.v, hexPubKey, hexChainCode, path);
+
+console.log(result);
+
 ```
 
 ### How It Works
