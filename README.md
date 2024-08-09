@@ -99,6 +99,12 @@ Verifies a signature derived from a message using the provided public key, chain
 
 Contributions are welcome! If you have suggestions for improvements, additional utilities, or have found bugs, please feel free to open an issue or submit a pull request on GitHub.
 
+## Repository
+
+Find the project on GitHub:
+
+[CryptoPath Repository](https://github.com/bitspent/cryptopath)
+
 ## License
 
 This project is licensed under the MIT License.
